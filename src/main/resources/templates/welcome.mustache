@@ -6,12 +6,14 @@
   <body>}}
 
 {{#layout}}{{#menu}}Home{{/menu}}
+  <div id="main"{{#stream}} hx-swap-oob="true"{{/stream}}>
     <h2 th:text="#{welcome}">Welcome</h2>
     <div class="row">
         <div class="col-md-12">
           <img class="img-responsive" src="resources/images/pets.png"/>
         </div>
     </div>
+  </div>
 {{/layout}}
 
 {{!  </body>

@@ -1,0 +1,45 @@
+{{!
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <body>
+  <nav class="navbar navbar-expand-lg navbar-dark" role="navigation">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><span></span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-navbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id="main-navbar">}}
+
+        <ul id="menus" class="nav navbar-nav me-auto"{{#stream}} hx-swap-oob="true"{{/stream}}>
+
+          {{#menus}}<li class="nav-item">
+            <a class="nav-link {{#active}}active{{/active}}" href="{{path}}" title="{{title}}">
+              <span class="fa fa-{{glyph}}" aria-hidden="true"></span>
+              <span>{{name}}</span>
+            </a>
+          </li>{{/menus}}
+
+        </ul>
+      {{!</div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="container xd-container">
+
+      <br />
+      <br />
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+            <img src="/resources/images/spring-pivotal-logo.png" alt="Sponsored by Pivotal" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>}}

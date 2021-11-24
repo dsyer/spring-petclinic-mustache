@@ -7,27 +7,31 @@
 
 {{#layout}}{{#menu}}Owners{{/menu}}
 
-  <h2>Owner</h2>
-  <form class="form-horizontal" id="add-owner-form" method="post">
-    {{#form.owner}}
-    <div class="form-group has-feedback">
-      {{#inputField}}First Name <input name="firstName"/>{{/inputField}}
-      {{#inputField}}Last Name <input name="lastName"/>{{/inputField}}
-      {{#inputField}}Address <input name="address"/>{{/inputField}}
-      {{#inputField}}City <input name="city"/>{{/inputField}}
-      {{#inputField}}Telephone <input name="telephone"/>{{/inputField}}
-    </div>
-    {{/form.owner}}
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        {{#owner}}<button
-          class="btn btn-primary" type="submit">
-          {{#new}}Add Owner{{/new}}
-          {{^new}}Update Owner{{/new}}
-        </button>{{/owner}}
+  <div id="main"{{#stream}} hx-swap-oob="true"{{/stream}}>
+
+    <h2>Owner</h2>
+    <form class="form-horizontal" id="add-owner-form" method="post">
+      {{#form.owner}}
+      <div class="form-group has-feedback">
+        {{#inputField}}First Name <input name="firstName"/>{{/inputField}}
+        {{#inputField}}Last Name <input name="lastName"/>{{/inputField}}
+        {{#inputField}}Address <input name="address"/>{{/inputField}}
+        {{#inputField}}City <input name="city"/>{{/inputField}}
+        {{#inputField}}Telephone <input name="telephone"/>{{/inputField}}
       </div>
-    </div>
-  </form>
+      {{/form.owner}}
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          {{#owner}}<button
+            class="btn btn-primary" type="submit">
+            {{#new}}Add Owner{{/new}}
+            {{^new}}Update Owner{{/new}}
+          </button>{{/owner}}
+        </div>
+      </div>
+    </form>
+
+  </div>
 
 {{/layout}}
 

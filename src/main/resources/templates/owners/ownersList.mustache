@@ -7,6 +7,8 @@
 
 {{#layout}}{{#menu}}Owners{{/menu}}
 
+  <div id="main"{{#stream}} hx-swap-oob="true"{{/stream}}>
+
     <h2>Owners</h2>
 
     <table id="owners" class="table table-striped">
@@ -61,6 +63,8 @@
             {{#last}}<span title="Last" class="fa fa-fast-forward"></span>{{/last}}
         </span>
     </div>{{/hasPages}}
+
+  </div>
 
 {{/layout}}
 

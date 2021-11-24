@@ -7,9 +7,10 @@
 
 {{#layout}}{{#menu}}Owners{{/menu}}
 
+  <div id="main"{{#stream}} hx-swap-oob="true"{{/stream}}>
+
     <h2>Owner Information</h2>
-  
-  
+
     {{#owner}}<table class="table table-striped">
       <tr>
         <th>Name</th>
@@ -76,6 +77,8 @@
       </tr>{{/owner.pets}}
   
     </table>
+
+  </div>
 
 {{/layout}}
 

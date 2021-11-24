@@ -6,11 +6,11 @@
   <body>}}
 
 {{#layout}}
-
+  <div id="main"{{#stream}} hx-swap-oob="true"{{/stream}}>
     <img src="/resources/images/pets.png"/>
     <h2>Something happened...</h2>
     <p>{{message}}</p>
-
+  </div>
 {{/layout}}
 
 {{!  </body>

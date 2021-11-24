@@ -26,8 +26,10 @@ import com.samskivert.mustache.Template.Fragment;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.system.Application.Menu;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 /**
  * Utilities for rendering the HTML layout (menus, logs etc.)
@@ -66,8 +68,18 @@ public class LayoutAdvice {
 	}
 
 	@ModelAttribute("layout")
-	public Mustache.Lambda layout(Map<String, Object> model) {
-		return new Layout(compiler);
+	public Mustache.Lambda layout(@RequestHeader Map<String, Object> headers) {
+		if ("true".equals(headers.get("hx-request"))) {
+			return new Layout(compiler, "fragments/stream");
+		}
+		return new Layout(compiler, "fragments/layout");
+	}
+
+	@ModelAttribute
+	public void addStream(Model model, @RequestHeader Map<String, Object> headers) {
+		if ("true".equals(headers.get("hx-request"))) {
+			model.addAttribute("stream", true);
+		}
 	}
 
 }
@@ -75,9 +87,11 @@ public class LayoutAdvice {
 class Layout extends HashMap<String, String> implements Mustache.Lambda {
 
 	private Compiler compiler;
+	private String template;
 
-	public Layout(Compiler compiler) {
+	public Layout(Compiler compiler, String template) {
 		this.compiler = compiler;
+		this.template = template;
 		setTitle("Spring PetClinic");
 	}
 
@@ -88,7 +102,7 @@ class Layout extends HashMap<String, String> implements Mustache.Lambda {
 	@Override
 	public void execute(Fragment frag, Writer out) throws IOException {
 		put("body", frag.execute());
-		compiler.compile("{{>fragments/layout}}").execute(frag.context(), out);
+		compiler.compile("{{>" + template + "}}").execute(frag.context(), out);
 	}
 
 }

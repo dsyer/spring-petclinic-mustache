@@ -17,12 +17,14 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+  <script src="/webjars/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script async src="/webjars/htmx.org/dist/htmx.min.js"></script>
   <link rel="stylesheet" href="/resources/css/petclinic.css" />
   <link rel="stylesheet" href="/webjars/font-awesome/css/font-awesome.min.css">
 
 </head>
 
-<body>
+<body hx-swap="none" hx-boost="true" hx-headers='{"Accept":"text/html"}'>
 
   <nav class="navbar navbar-expand-lg navbar-dark" role="navigation">
     <div class="container-fluid">
@@ -32,16 +34,7 @@
       </button>
       <div class="navbar-collapse collapse" id="main-navbar">
 
-        <ul class="nav navbar-nav me-auto">
-
-          {{#menus}}<li class="nav-item">
-            <a class="nav-link {{#active}}active{{/active}}" href="{{path}}" title="{{title}}">
-              <span class="fa fa-{{glyph}}" aria-hidden="true"></span>
-              <span>{{name}}</span>
-            </a>
-          </li>{{/menus}}
-
-        </ul>
+        {{>fragments/menus}}
       </div>
     </div>
   </nav>
@@ -62,7 +55,11 @@
     </div>
   </div>
 
-  <script src="/webjars/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    htmx.on("htmx:responseError", function(evt) {
+        htmx.find("#main").innerHTML = evt.detail.xhr.response;
+      })
+  </script>
 
 </body>
 
