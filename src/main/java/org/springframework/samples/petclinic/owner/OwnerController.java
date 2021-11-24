@@ -15,12 +15,11 @@
  */
 package org.springframework.samples.petclinic.owner;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Spliterator.OfInt;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.StreamSupport;
 
 import javax.validation.Valid;
 
@@ -121,21 +120,18 @@ class OwnerController {
 		model.addAttribute("previous", page - 1);
 		model.addAttribute("next", page + 1);
 		model.addAttribute("pages", IntStream.range(1, paginated.getTotalPages() + 1)
-				.mapToObj(value -> new PageModel(value, page)).collect(Collectors.toList()));
+				.mapToObj(value -> pagemodel(value, page)).collect(Collectors.toList()));
 		model.addAttribute("hasPages", paginated.getTotalPages() > 1);
 		model.addAttribute("totalPages", paginated.getTotalPages());
 		model.addAttribute("listOwners", listOwners);
 		return "owners/ownersList";
 	}
 
-	static class PageModel {
-		boolean current;
-		int number;
-
-		PageModel(int value, int page) {
-			current = value == page;
-			number = value;
-		}
+	private Map<String, Object> pagemodel(int value, int page) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("current", value == page);
+		map.put("number", value);
+		return map;
 	}
 
 	private Page<Owner> findPaginatedForOwnersLastName(int page, String lastname) {
